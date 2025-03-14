@@ -1,0 +1,23 @@
+body {
+    background-image: url('../images/OIP.jpg');
+    background-repeat: None;
+    background-size: 100%;
+}
+
+.img-thumbnail {
+    padding: .25rem;
+    /* background-color: #fff; */
+    border: 3px solid #00ff22;
+    border-radius: 100.25rem;
+    max-width: 100%;
+    height: auto;
+}
+
+p{
+    color : rgb(255, 255, 255);
+    font-size: larger;
+}
+
+.card-img-top {
+    width: 100%;
+}
