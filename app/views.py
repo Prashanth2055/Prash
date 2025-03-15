@@ -114,3 +114,7 @@ def search(request):
     parameters = {'posts' : allPosts, 'query' : query }
 
     return render(request,'search.html', parameters)
+
+
+def services(request):
+    return render(request,'services.html')
