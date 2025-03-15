@@ -54,31 +54,36 @@ def handlelogin(request):
     return render(request, 'login.html')
 
 def handlesignup(request):
-    if request.method == "POST":
-        uname = request.POST.get("username")
-        email = request.POST.get("email")
-        password1 = request.POST.get("password1")
-        password2 = request.POST.get("password2")
+    if request.method=="POST":
+        uname=request.POST.get("username")
+        email=request.POST.get("email")
+        password=request.POST.get("pass1")
+        confirmpassword=request.POST.get("pass2")
+        # print(uname,email,password,confirmpassword)
+        if password!=confirmpassword:
+            messages.warning(request,"Password is Incorrect")
+            return redirect('/signup')
 
-        if password1 != password2:
-            return HttpResponse("Password Incorrect")
-        
-        try:
-            if User.objects.get(username = uname):
-                return HttpResponse("Username is taken")
-        except:
-            pass
 
         try:
-            if User.objects.get(email = email):
-                return HttpResponse("Email is taken")
+            if User.objects.get(username=uname):
+                messages.info(request,"UserName Is Taken")
+                return redirect('/signup')
         except:
             pass
-
-        myuser = User.objects.create_user(uname,email,password1)
+        try:
+            if User.objects.get(email=email):
+                messages.info(request,"Email Is Taken")
+                return redirect('/signup')
+        except:
+            pass
+    
+        myuser=User.objects.create_user(uname,email,password)
         myuser.save()
-        return HttpResponse("Sign up Sucessfull")
-    return render(request, 'signup.html')
+        messages.success(request,"Signup Success Please login!")
+        return redirect('/login')
+              
+    return render(request,'signup.html')
 
 
 def handlelogout(request):
