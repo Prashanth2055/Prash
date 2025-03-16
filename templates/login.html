@@ -42,7 +42,7 @@
                 Login With <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo">
             </a>
 
-            <form action="/login/" method="POST">
+            <form action="{% url 'handlelogin' %}" method="POST">
                 {% csrf_token %}
                 
                 <label class="text-white">Username</label>
@@ -52,7 +52,7 @@
 
                 <label class="text-white">Password</label>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="password1" required>
+                    <input type="password" class="form-control" name="password" required>
                 </div>
 
                 <input class="btn btn-primary mt-3" type="submit" value="Log In">

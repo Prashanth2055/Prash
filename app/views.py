@@ -42,8 +42,8 @@ def contact(request):
 def handlelogin(request):
     if request.method == "POST":
         uname = request.POST.get("username")
-        password1 = request.POST.get("password1")
-        myuser = authenticate(username=uname,password=password1)
+        password = request.POST.get("password")
+        myuser = authenticate(username=uname,password=password)
         if myuser is not None:
             login(request, myuser)
             messages.success(request,"Login Success")
@@ -57,8 +57,8 @@ def handlesignup(request):
     if request.method=="POST":
         uname=request.POST.get("username")
         email=request.POST.get("email")
-        password=request.POST.get("pass1")
-        confirmpassword=request.POST.get("pass2")
+        password=request.POST.get("password1")
+        confirmpassword=request.POST.get("password2")
         # print(uname,email,password,confirmpassword)
         if password!=confirmpassword:
             messages.warning(request,"Password is Incorrect")
@@ -68,20 +68,20 @@ def handlesignup(request):
         try:
             if User.objects.get(username=uname):
                 messages.info(request,"UserName Is Taken")
-                return redirect('/signup')
+                return redirect('/signup/')
         except:
             pass
         try:
             if User.objects.get(email=email):
                 messages.info(request,"Email Is Taken")
-                return redirect('/signup')
+                return redirect('/signup/')
         except:
             pass
     
-        myuser=User.objects.create_user(uname,email,password)
+        myuser = User.objects.create_user(uname,email,password)
         myuser.save()
         messages.success(request,"Signup Success Please login!")
-        return redirect('/login')
+        return redirect('/login/')
               
     return render(request,'signup.html')
 
