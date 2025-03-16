@@ -117,4 +117,8 @@ def search(request):
 
 
 def services(request):
-    return render(request,'services.html')
+    if not request.user.is_authenticated:
+        messages.warning(request,"Hey just login and use my website")
+        return redirect('/login/')
+    else:
+        return render(request,'services.html')
