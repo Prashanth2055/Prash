@@ -24,7 +24,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/"><img id='logo' src="{% static 'images/logo.png' %}" alt="Img"></a>
+        <a class="navbar-brand" href="/">Prashanth G</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -44,14 +44,17 @@
             <li class="nav-item">
               <a class="nav-link" href="/blog">Blog</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="/services">Services</a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+              <a class="nav-link" href="/contact">Contact Us</a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
+              <a class="nav-link" href="/about">About Us</a>
             </li>
             {% if not request.user.is_authenticated %}
             <li class="nav-item dropdown">
@@ -83,18 +86,19 @@
                 Welcome {{request.user}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
               </ul>
             </li>
+
+            {% endif %}
           </ul>
-          {% endif %}
-          <form class="d-flex ms-auto" action="/search" method="get">
+          <form class="d-flex" action="/search" method="get">
             <input
               class="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
-              name = "search"
+              name="search"
             />
             <button class="btn btn-outline-light" type="submit">Search</button>
           </form>
