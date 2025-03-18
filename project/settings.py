@@ -163,3 +163,7 @@ STATIC_URL = "/static/"
 CSRF_TRUSTED_ORIGINS = [
     "https://prash-b2ft.onrender.com"
 ]
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "1074900474311-khpmd69fqat5s612287fcb92l8puh5dd.apps.googleusercontent.com"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
