@@ -41,7 +41,8 @@
             </div>
             {% endif %}
 
-            <a  class="btn btn-sm btn-block btn-light mt-2" id="gp" href="{% provider_login_url 'google' %}">Login With <img src="https://img.icons8.com/color/30/000000/google-logo.png"/></a>
+            <a class="btn btn-sm btn-block btn-light mt-2 d-flex align-items-center justify-content-center" id="gp" href="{% provider_login_url 'google' %}">Login With 
+                <img src="https://img.icons8.com/color/30/000000/google-logo.png"/></a>
             <form action="{% url 'handlelogin' %}" method="POST">
                 {% csrf_token %}
                 

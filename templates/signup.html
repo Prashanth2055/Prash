@@ -24,7 +24,7 @@
         <div class="col-md-4 mt-3 ">
           <h3 class="text-white text-center ">SignUp Here</h3>
 
-          <a class="btn btn-sm btn-block btn-light mt-0" href="{% provider_login_url 'google' %}">
+          <a class="btn btn-sm btn-block btn-light mt-0" href="{% provider_login_url 'google' process='login' %}">
             Login With <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo">
         </a>
         
@@ -45,8 +45,8 @@
       {% endif %}
 
         
-        <form action="/signup/" method="POST">
-          {% csrf_token %}
+      <form action="{% url 'handlesignup' %}" method="POST">
+        {% csrf_token %}
         <label class="text-white">Username</label>
         <div class="form-group">
           <input type="text" class="form-control" name="username" Required>
@@ -68,7 +68,7 @@
         </div>
       </form>
       <br> <br>
-      <p> Already User <a href="/login"> Login </a> </p>
+      <p> Already a user? <a href="{% url 'handlelogin' %}">Login</a> </p>
         </div>
     
       </div>
