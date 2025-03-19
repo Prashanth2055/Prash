@@ -59,13 +59,14 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-AUTHENTICATION_BACKENDS = ( 'django.contrib.auth.backends.ModelBackend', 'allauth.account.auth_backends.AuthenticationBackend', )
+AUTHENTICATION_BACKENDS = ( 'django.contrib.auth.backends.ModelBackend', 'allauth.account.auth_backends.AuthenticationBackend' )
 
-SITE_ID = 4
+SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
-SOCIALACCOUNT_PROVIDERS = { 'google': { 'SCOPE': [ 'profile', 'email', ], 'AUTH_PARAMS': { 'access_type': 'online', } } }
+SOCIALACCOUNT_PROVIDERS = { 'google': { 'SCOPE': [ 'profile', 'email', ], 'AUTH_PARAMS': { 'access_type': 'online' } } }
 
 
 ROOT_URLCONF = 'project.urls'
@@ -165,7 +166,3 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1074900474311-8mqc2vucr31k3ec3evbnhea0cs715dom.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = "https://prash-b2ft.onrender.com/accounts/google/login/callback/"
