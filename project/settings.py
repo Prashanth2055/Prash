@@ -95,15 +95,9 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Render Database',
-        'USER' : 'postgres',
-        'PASSWORD' : '1234',
-        'HOST' : 'dpg-cve2ulogph6c73cbjhhg-a',
-        'PORT': '5432',
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
     }
-}
+
 
 
 # Password validation
@@ -171,6 +165,3 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-import dj_database_url
-
-DATABASES['default'] = dj_database_url.config(default=os.getenv('DATABASE_URL'))

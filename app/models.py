@@ -19,3 +19,7 @@ class Blogs(models.Model):
 
     def __str__(self):
         return f"Uploaded by {self.authname}"
+    
+
+
+
