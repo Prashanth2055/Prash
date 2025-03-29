@@ -19,3 +19,4 @@ gunicorn
 waitress
 dj-database-url
 psycopg
+dotenv
