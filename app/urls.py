@@ -10,6 +10,10 @@ urlpatterns = [
     path('logout',views.handlelogout, name="handlelogout"),
     path('signup/',views.handlesignup, name="handlesignup"),
     path('blog/',views.handleblog, name="handleblog"),
-    path('services/',views.services,name="services")
+    path('services/',views.services,name="services"),
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
+    path('profile/',views.update_profile,name="profile"),
+    path('resetpassword/',views.resetpassword,name="resetpassword"),
+    path('accounts/reset/<uidb64>/<token>/', views.manual_password_reset_confirm, name="changepassword"),
 
 ]

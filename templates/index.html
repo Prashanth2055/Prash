@@ -42,17 +42,25 @@
       <div class="carousel-item active">
         <img src="{% static 'images/dhoni.jpg' %}" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <button class="compose-btn">Welcome</button>
+          {% if request.user.is_authenticated %}
+          <button class="compose-btn">Welcome {{user.first_name}} {{user.last_name}}</button>
+          {% else %}
+          <button class="compose-btn">Welcome New User</button>
+          {% endif %}
         <p>Thanks for visting My Page</p>
         </div>
       </div>
       <div class="carousel-item">
         <img src="{% static 'images/dhoni2.jpg' %}" class="d-block w-100" alt="Dhoni Image">
         <div class="carousel-caption d-none d-md-block">
+          {% if request.user.is_authenticated %}
+          <button class="compose-btn">Thanks for Login</button>
+          {% else %}
             <a href="{% url 'handlelogin' %}">
                 <button class="compose-btn">Login Here</button>
             </a>    
             <p>Login to view more features</p>
+          {% endif %}
         </div>
     </div>
       <div class="carousel-item">

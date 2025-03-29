@@ -21,3 +21,21 @@ p{
 .card-img-top {
     width: 100%;
 }
+
+
+.forgot-password {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.forgot-password a {
+    color: #f8f9fa; /* White */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.forgot-password a:hover {
+    color: #ffd700; /* Gold */
+    text-decoration: underline;
+}

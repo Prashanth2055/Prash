@@ -83,9 +83,10 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Welcome {{request.user}}
+                Welcome {{request.user.first_name}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'profile' %}">Edit Profile</a></li>
                 <li><a class="dropdown-item" href="/logout">Logout</a></li>
               </ul>
             </li>
@@ -106,23 +107,18 @@
       </div>
     </nav>
 
-  {% if messages %}
-    <div class="mt-3">
-      {% for message in messages %}
-      <div
-      class="alert alert-{{message.tags}} alert-dismissible fade show"
-      role="alert"
-    >
-      <strong></strong> {{message}}
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="alert"
-        aria-label="Close"
-      ></button>
-    </div>
+    {% if messages %}
+    {% for message in messages %}
+      {% if message.tags == "success" and "login" in message.message %}
+        {% if user.is_authenticated %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show text-center" role="alert">
+            <strong></strong> Welcome, {{ user.first_name }} - {{ user.last_name }}. Thanks for logging in.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+      {% endif %}
     {% endfor %}
-  {% endif %} 
+  {% endif %}
     
     {% block body %} {% endblock body %}
     <!-- Optional JavaScript; choose one of the two! -->

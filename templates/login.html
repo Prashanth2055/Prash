@@ -20,7 +20,6 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-md-6">
-            <a href="/"><img src="{% static 'images/Logo.png' %}"  class="img-thumbnail" alt=""> </a>
         </div>
 
         <div class="col-md-4 mt-3">
@@ -60,6 +59,9 @@
             </form>
 
             <br><br>
+            <p class="forgot-password">
+                <a href="{% url 'resetpassword' %}">Forgot your password?</a>
+            </p>
             <p class="text-white">Not a User? <a href="/signup">Sign Up Here</a></p>
         </div>
     </div>
