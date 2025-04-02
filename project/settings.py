@@ -168,5 +168,3 @@ STATIC_URL = "/static/"
 CSRF_TRUSTED_ORIGINS = [
     "https://prash-b2ft.onrender.com"
 ]
-
-

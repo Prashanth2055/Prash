@@ -15,5 +15,6 @@ urlpatterns = [
     path('profile/',views.update_profile,name="profile"),
     path('resetpassword/',views.resetpassword,name="resetpassword"),
     path('accounts/reset/<uidb64>/<token>/', views.manual_password_reset_confirm, name="changepassword"),
+    path("confirm-email-update/<uidb64>/<token>/<new_email>/", views.confirm_email_update, name="confirm_email_update"),
 
 ]

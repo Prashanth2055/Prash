@@ -1,7 +1,64 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
-{% block title %} About {% endblock title %}
+{% block title %} Services {% endblock title %}
 
 {% block body %}
-<h1>Welcome to Service Page</h1>
+    <div class="profile-container">
+        <div class="profile-card">
+            <h1 class="profile-title">Services</h1>
+            <p class="reset-description">
+                Welcome to Service Page
+            </p>
+        </div>
+    </div>
+
+    <style>
+        /* Center the container */
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+        }
+
+        /* Card styling */
+        .profile-card {
+            width: 100%;
+            max-width: 450px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .profile-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .reset-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background: #007bff;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+    </style>
 {% endblock body %}

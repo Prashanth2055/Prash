@@ -134,18 +134,22 @@ def handleblog(request):
     
 
 def search(request):
-    query = request.GET['search']
-    if len(query) > 100:
-        allPosts = Blogs.objects.none()
+    if not request.user.is_authenticated:
+        messages.warning(request,"Hey just login and use my website")
+        return redirect('/login/')
     else:
-        allPostsTitle = Blogs.objects.filter(title__icontains=query)
-        allPostsDescription = Blogs.objects.filter(description__icontains=query)
-        allPosts = allPostsTitle.union(allPostsDescription)
-    if allPosts.count() == 0:
-        messages.warning(request, "No Post Found")
-    parameters = {'posts' : allPosts, 'query' : query }
+        query = request.GET['search']
+        if len(query) > 100:
+            allPosts = Blogs.objects.none()
+        else:
+            allPostsTitle = Blogs.objects.filter(title__icontains=query)
+            allPostsDescription = Blogs.objects.filter(description__icontains=query)
+            allPosts = allPostsTitle.union(allPostsDescription)
+        if allPosts.count() == 0:
+            messages.warning(request, "No Post Found")
+        parameters = {'posts' : allPosts, 'query' : query }
 
-    return render(request,'search.html', parameters)
+        return render(request,'search.html', parameters)
 
 
 def services(request):
@@ -182,17 +186,33 @@ def update_profile(request):
         user = request.user
         first_name = request.POST.get("first_name")
         last_name = request.POST.get("last_name")
-        email = request.POST.get("email")
+        new_email = request.POST.get("email")
 
-        if User.objects.filter(email=email).exclude(username=user.username).exists():
-            messages.error(request,"Email is already in use by another account")
+        if new_email != user.email:
+            if User.objects.filter(email=new_email).exclude(username=user.username).exists():
+                messages.error(request,"Email is already in use by another account")
+                return redirect("profile")
+            
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            token = default_token_generator.make_token(user)
+            verification_link = request.build_absolute_uri(
+                reverse("confirm_email_update", kwargs={"uidb64":uid, "token":token , "new_email" : new_email})
+            )
+
+            mail_subject = "Confirm Your Email Change"
+            message = render_to_string("email_verification.html", {
+                "user" : user,
+                "verification_link" : verification_link
+            })
+            email_message = EmailMessage(mail_subject,message, to=[new_email])
+            email_message.send()
+
+            messages.info(request, "A verification email has been sent to your new email address. Please confirm to update")
             return redirect("profile")
         
         user.first_name = first_name
         user.last_name = last_name
-        user.email = email
         user.save()
-
         messages.success(request, 'Your profile has been updated successfully')
         return redirect("profile")
     
@@ -250,3 +270,19 @@ def manual_password_reset_confirm(request, uidb64, token):
 
         return render(request,"password_reset_confirm.html", {"validlink": False})
 
+@login_required
+def confirm_email_update(request,uidb64,token,new_email):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    
+    if user is not None and default_token_generator.check_token(user, token):
+        user.email = new_email
+        user.save()
+        messages.success(request, "Your email has been updated successfully!")
+        return redirect("profile")
+    else:
+        messages.error(request, "Email verification link is invalid or expired.")
+        return redirect("profile")
